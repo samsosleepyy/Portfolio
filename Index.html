@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanakrit Bupphataku | Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Kanit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cyan: {
+                            400: '#22d3ee',
+                            500: '#06b6d4',
+                            950: '#083344',
+                        }
+                    },
+                    animation: {
+                        'spin-slow': 'spin 20s linear infinite',
+                        'spin-reverse-slow': 'spin-reverse 15s linear infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        'spin-reverse': {
+                            'from': { transform: 'rotate(360deg)' },
+                            'to': { transform: 'rotate(0deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #020617; /* Slate 950 */
+            color: #ecfeff; /* Cyan 50 */
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #06b6d4; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #22d3ee; 
+        }
+
+        .text-glow {
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+        .box-glow {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #22d3ee, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="selection:bg-cyan-500 selection:text-black">
+
+    <!-- Background Grid Effect -->
+    <div class="fixed inset-0 z-0 opacity-10 pointer-events-none" 
+         style="background-image: linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px); background-size: 40px 40px;">
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-slate-950/90 backdrop-blur-md border-b border-cyan-900/30 z-50 shadow-lg shadow-cyan-900/10 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#home" class="flex-shrink-0 flex items-center cursor-pointer group hover:scale-105 transition-transform duration-300">
+                    <i data-lucide="cpu" class="text-cyan-400 mr-2 group-hover:animate-pulse"></i>
+                    <span class="font-bold text-2xl tracking-tighter text-white">THANAKRIT<span class="text-cyan-400">.DEV</span></span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-2">
+                    <a href="#home" class="nav-link px-4 py-2 rounded font-medium text-sm text-cyan-400 bg-cyan-950/50 border border-cyan-500/50 shadow-[0_0_10px_rgba(6,182,212,0.2)] transition-all duration-300">Home</a>
+                    <a href="#about" class="nav-link px-4 py-2 rounded font-medium text-sm text-slate-400 hover:text-cyan-300 hover:bg-cyan-950/20 transition-all duration-300">About</a>
+                    <a href="#passion" class="nav-link px-4 py-2 rounded font-medium text-sm text-slate-400 hover:text-cyan-300 hover:bg-cyan-950/20 transition-all duration-300">Passion</a>
+                    <a href="#projects" class="nav-link px-4 py-2 rounded font-medium text-sm text-slate-400 hover:text-cyan-300 hover:bg-cyan-950/20 transition-all duration-300">Projects</a>
+                    <a href="#contact" class="nav-link px-4 py-2 rounded font-medium text-sm text-slate-400 hover:text-cyan-300 hover:bg-cyan-950/20 transition-all duration-300">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-cyan-400 hover:text-white transition">
+                        <i data-lucide="menu" class="w-7 h-7"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-cyan-900/50 overflow-hidden transition-all duration-300">
+            <div class="px-2 pt-2 pb-4 space-y-1">
+                <a href="#home" class="block w-full text-left px-4 py-3 rounded-md text-base font-medium text-slate-300 hover:text-cyan-400 hover:bg-cyan-950/30 border-l-2 border-transparent hover:border-cyan-500 transition-all">Home</a>
+                <a href="#about" class="block w-full text-left px-4 py-3 rounded-md text-base font-medium text-slate-300 hover:text-cyan-400 hover:bg-cyan-950/30 border-l-2 border-transparent hover:border-cyan-500 transition-all">About</a>
+                <a href="#passion" class="block w-full text-left px-4 py-3 rounded-md text-base font-medium text-slate-300 hover:text-cyan-400 hover:bg-cyan-950/30 border-l-2 border-transparent hover:border-cyan-500 transition-all">Passion</a>
+                <a href="#projects" class="block w-full text-left px-4 py-3 rounded-md text-base font-medium text-slate-300 hover:text-cyan-400 hover:bg-cyan-950/30 border-l-2 border-transparent hover:border-cyan-500 transition-all">Projects</a>
+                <a href="#contact" class="block w-full text-left px-4 py-3 rounded-md text-base font-medium text-slate-300 hover:text-cyan-400 hover:bg-cyan-950/30 border-l-2 border-transparent hover:border-cyan-500 transition-all">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4 overflow-hidden min-h-screen flex items-center">
+        <!-- Background Gradients -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] mix-blend-screen pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <!-- Left Text Content -->
+            <div class="text-center md:text-left space-y-8" data-aos="fade-up" data-aos-duration="1000">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-cyan-950/50 border border-cyan-500/30 text-cyan-400 rounded-lg text-sm font-semibold tracking-wide shadow-[0_0_10px_rgba(6,182,212,0.2)]">
+                    <span class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
+                    Aspiring Educational Technologist
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight">
+                    Hello, I am <br />
+                    <span class="relative inline-block mt-2">
+                        <span class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 blur opacity-30 animate-pulse"></span>
+                        <span class="relative text-gradient drop-shadow-sm">
+                            Thanakrit Bupphataku
+                        </span>
+                    </span>
+                </h1>
+                
+                <p class="text-lg md:text-xl text-slate-300 leading-relaxed max-w-lg mx-auto md:mx-0 border-l-4 border-cyan-500/50 pl-6">
+                    "เปลี่ยนภาษาคน ให้เป็นภาษาโค้ด เปลี่ยนเรื่องซับซ้อน ให้เป็นเรื่องเข้าใจง่าย"
+                    <br/><br/>
+                    นักเรียนศิลป์-ภาษาที่หลงใหลในโลกของเทคโนโลยี มุ่งมั่นที่จะผสานทักษะการสื่อสารและการเขียนโปรแกรม เพื่อพัฒนานวัตกรรมทางการศึกษาในอนาคต
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center md:justify-start pt-6">
+                    <a href="#projects" class="group relative px-8 py-4 bg-cyan-600 text-white text-lg font-bold rounded-lg shadow-[0_0_15px_rgba(6,182,212,0.4)] hover:bg-cyan-500 transition-all overflow-hidden">
+                        <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                        <span class="relative z-10">View My Work</span>
+                    </a>
+                    
+                    <a href="#contact" class="px-8 py-4 bg-transparent text-cyan-400 hover:text-purple-400 text-lg font-bold rounded-lg border border-cyan-500/50 hover:bg-slate-900 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:border-purple-500 transition-all">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Right Image Section with Pop-out Effect -->
+            <div class="flex justify-center relative items-center" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                <!-- System Background Container -->
+                <div class="relative w-72 h-72 md:w-96 md:h-96 flex items-center justify-center">
+                    
+                    <!-- Spinning Rings -->
+                    <div class="absolute inset-0 border-2 border-dashed border-cyan-500/30 rounded-full z-0 animate-spin-slow"></div>
+                    <div class="absolute inset-4 border border-cyan-500/20 rounded-3xl z-0 animate-spin-reverse-slow"></div>
+                    <div class="absolute inset-4 border border-purple-500/20 rounded-3xl transform scale-105 z-0 animate-spin-slow" style="animation-duration: 25s;"></div>
+
+                    <!-- Static Tech Panel (Background) -->
+                    <div class="absolute inset-8 bg-slate-900/80 backdrop-blur-sm border border-cyan-500/30 rounded-xl z-0 shadow-[0_0_30px_rgba(6,182,212,0.1)]"></div>
+
+                    <!-- The Image (Popped Out / Outside) -->
+                    <div class="relative z-20 w-[110%] h-[110%] -mt-8 flex items-end justify-center pointer-events-auto hover:-translate-y-2 hover:scale-105 transition-transform duration-500">
+                        <img 
+                            src="assist/profile.png" 
+                            onerror="this.src='https://placehold.co/600x600/0f172a/06b6d4?text=TB+Profile'"
+                            alt="Thanakrit Profile" 
+                            class="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(6,182,212,0.5)] filter contrast-110"
+                        />
+                    </div>
+                    
+                    <!-- Floating Stat Boxes -->
+                    <div class="absolute -bottom-2 -left-8 bg-slate-900/90 border border-cyan-500/50 p-4 rounded-lg shadow-[0_0_15px_rgba(6,182,212,0.3)] z-30 backdrop-blur-md hover:scale-110 transition-transform duration-300">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="terminal" class="text-cyan-400"></i>
+                            <div>
+                                <p class="text-xs text-cyan-500 font-semibold">Coding Since</p>
+                                <p class="font-bold text-white">Middle School</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="absolute -top-2 -right-8 bg-slate-900/90 border border-purple-500/50 p-4 rounded-lg shadow-[0_0_15px_rgba(168,85,247,0.3)] z-30 backdrop-blur-md hover:scale-110 transition-transform duration-300">
+                         <div class="flex items-center gap-3">
+                            <i data-lucide="users" class="text-purple-400"></i>
+                            <div>
+                                <p class="text-xs text-purple-500 font-semibold">Community</p>
+                                <p class="font-bold text-white">3,000+ Members</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-slate-900 border-y border-cyan-900/30 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="mb-16 flex items-center gap-4" data-aos="fade-up">
+                <div class="h-1 w-12 bg-cyan-500 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.8)]"></div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white">About Me</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Left Column: Info Cards -->
+                 <div class="bg-slate-950/50 p-8 rounded-xl border border-cyan-500/20 shadow-lg h-full hover:border-cyan-500/40 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] transition-all duration-300" data-aos="fade-right">
+                    <div class="space-y-8">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-cyan-900/20 p-3 rounded-lg text-cyan-400 border border-cyan-500/30">
+                                <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-xl text-white">Education</h3>
+                                <p class="text-slate-300 mt-1 font-medium">โรงเรียนปักธงชัยประชานิรมิต</p>
+                                <p class="text-slate-400 text-sm mt-1">ระดับชั้นมัธยมศึกษาปีที่ 6</p>
+                                <p class="text-slate-400 text-sm">แผนการเรียน: ศิลป์-ภาษาญี่ปุ่น</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="bg-purple-900/20 p-3 rounded-lg text-purple-400 border border-purple-500/30">
+                                <i data-lucide="target" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-xl text-white">Future Goal</h3>
+                                <p class="text-slate-300 mt-1">คณะครุศาสตร์ / ศึกษาศาสตร์</p>
+                                <p class="text-purple-400 font-semibold">สาขาเทคโนโลยีการศึกษา</p>
+                            </div>
+                        </div>
+
+                         <div class="flex items-start gap-4">
+                            <div class="bg-blue-900/20 p-3 rounded-lg text-blue-400 border border-blue-500/30">
+                                <i data-lucide="code" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-xl text-white">Technical Skills</h3>
+                                <div class="flex flex-wrap gap-2 mt-3">
+                                    <span class="px-3 py-1 bg-slate-800 border border-slate-700 rounded-full text-xs text-cyan-300 font-medium cursor-default hover:scale-110 hover:bg-slate-900 hover:border-cyan-500 transition-all">Lua Scripting</span>
+                                    <span class="px-3 py-1 bg-slate-800 border border-slate-700 rounded-full text-xs text-cyan-300 font-medium cursor-default hover:scale-110 hover:bg-slate-900 hover:border-cyan-500 transition-all">Web Development</span>
+                                    <span class="px-3 py-1 bg-slate-800 border border-slate-700 rounded-full text-xs text-cyan-300 font-medium cursor-default hover:scale-110 hover:bg-slate-900 hover:border-cyan-500 transition-all">Community Management</span>
+                                    <span class="px-3 py-1 bg-slate-800 border border-slate-700 rounded-full text-xs text-cyan-300 font-medium cursor-default hover:scale-110 hover:bg-slate-900 hover:border-cyan-500 transition-all">Content Creation</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                 
+                 <!-- Right Column: Text Story -->
+                 <div class="flex flex-col justify-center" data-aos="fade-left">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-white mb-3">Passion & Determination</h3>
+                        <p class="text-cyan-500 font-medium tracking-wide text-sm mb-4">ความมุ่งมั่นสู่รั้วราชภัฏนครราชสีมา</p>
+                    </div>
+                    
+                    <div class="space-y-6 text-slate-300 leading-relaxed text-lg">
+                        <p>
+                            ผมมีความตั้งใจอย่างแรงกล้าที่จะเข้าศึกษาต่อที่ <span class="text-cyan-400 font-bold">มหาวิทยาลัยราชภัฏนครราชสีมา</span> เส้นทางของผมไม่ได้เริ่มต้นด้วยความพร้อม ผมเริ่มหัดเขียนโค้ด <b>Lua</b> ตั้งแต่ ม.ต้น โดยต้องอาศัย <b>ร้านอินเทอร์เน็ตคาเฟ่</b> ในการฝึกฝนเพราะที่บ้านไม่มีคอมพิวเตอร์ จนถึงปัจจุบันที่ผมพัฒนาเว็บไซต์ ผมก็ยังคงมุ่งมั่นเขียนโค้ดผ่าน <b>VS Code (Web Version)</b> บนอุปกรณ์ที่มีจำกัด
+                        </p>
+                        <p>
+                            นี่คือบทพิสูจน์ถึงความพยายามและความทุ่มเทของผม ที่จะไม่ยอมให้อุปสรรคทางฐานะมาปิดกั้นการเรียนรู้ ผมสร้างผลงานทั้งหมดนี้ขึ้นมาด้วยตนเอง เพื่อแสดงให้เห็นว่าผมพร้อมแค่ไหนที่จะเข้าไปเติบโตในรั้วมหาวิทยาลัยแห่งนี้
+                        </p>
+
+                        <div class="grid sm:grid-cols-2 gap-4 mt-4">
+                            <div class="bg-slate-900/50 p-4 rounded-lg border border-cyan-500/30 hover:-translate-y-1 hover:border-cyan-500/60 transition-all duration-300">
+                                <h4 class="text-cyan-400 font-bold mb-2 flex items-center gap-2">
+                                    <i data-lucide="code" class="w-4 h-4"></i> สิ่งที่ถนัด
+                                </h4>
+                                <p class="text-sm text-slate-400 leading-relaxed">
+                                    ผมมีความเชี่ยวชาญในภาษา <b>HTML, CSS</b> สำหรับการทำ Web Design และภาษา <b>Lua</b> สำหรับการเขียนระบบเกมใน Roblox ซึ่งเป็นทักษะที่ผมฝึกฝนจนชำนาญ
+                                </p>
+                            </div>
+
+                            <div class="bg-slate-900/50 p-4 rounded-lg border border-pink-500/30 hover:-translate-y-1 hover:border-pink-500/60 transition-all duration-300">
+                                <h4 class="text-pink-400 font-bold mb-2 flex items-center gap-2">
+                                    <i data-lucide="brain" class="w-4 h-4"></i> การแก้ปัญหา
+                                </h4>
+                                <p class="text-sm text-slate-400 leading-relaxed">
+                                    ผมเรียนรู้สิ่งที่ไม่สนใจได้ช้า แต่ผมแก้ไขด้วยการ <b>"เชื่อมโยงกับสิ่งที่ชอบ"</b> เช่น นำทฤษฎีที่น่าเบื่อมาแปลงเป็นลอจิกในการเขียนโค้ด ทำให้ผมเข้าใจและสนุกกับมันได้
+                                </p>
+                            </div>
+                        </div>
+
+                        <p class="text-base text-slate-400 border-l-2 border-slate-700 pl-4 italic">
+                            "เพราะผมเชื่อว่า การเป็นครูยุคใหม่ ไม่ใช่แค่การมีความรู้ แต่คือการรู้จักปรับตัวและประยุกต์ใช้สิ่งที่มี เพื่อแก้ไขปัญหาและพัฒนาการเรียนรู้ให้ดียิ่งขึ้น"
+                        </p>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Passion & Journey Section -->
+    <section id="passion" class="py-24 bg-black relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-slate-950 to-slate-950"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">My Learning Journey</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">เส้นทางการเรียนรู้ที่ไม่เคยหยุดนิ่ง จากผู้เล่น สู่ผู้สร้าง และผู้แบ่งปัน</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="group bg-slate-900 border border-slate-800 p-8 rounded-xl relative overflow-hidden hover:-translate-y-2 hover:border-cyan-500/50 hover:shadow-[0_15px_30px_-10px_rgba(6,182,212,0.3)] transition-all duration-300" data-aos="fade-up" data-aos-delay="0">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                    <div class="mb-6 p-3 bg-slate-800 w-fit rounded-lg text-cyan-500 group-hover:text-cyan-400 group-hover:scale-110 transition-all">
+                        <i data-lucide="terminal" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">The Spark: Security & Code</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        เริ่มต้นความสนใจจากการตั้งคำถามว่า "ระบบทำงานอย่างไร?" ฝึกฝนการเขียนภาษา <b>Lua</b> ใน Roblox และศึกษาเรื่อง Cyber Security (Penetration Testing) เพื่อเข้าใจช่องโหว่และการป้องกันระบบ
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="group bg-slate-900 border border-slate-800 p-8 rounded-xl relative overflow-hidden hover:-translate-y-2 hover:border-blue-500/50 hover:shadow-[0_15px_30px_-10px_rgba(59,130,246,0.3)] transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                    <div class="mb-6 p-3 bg-slate-800 w-fit rounded-lg text-blue-500 group-hover:text-blue-400 group-hover:scale-110 transition-all">
+                        <i data-lucide="globe" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">The Builder: Web Development</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        ต่อยอดสู่การลงมือทำจริง โดยการพัฒนาเว็บไซต์ Download Hub ด้วยตนเอง เรียนรู้ HTML, CSS และการจัดการ Server เพื่อแก้ปัญหาการเข้าถึงไฟล์ Mod เกมที่ยุ่งยาก ให้ง่ายสำหรับผู้ใช้ทั่วไป
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="group bg-slate-900 border border-slate-800 p-8 rounded-xl relative overflow-hidden hover:-translate-y-2 hover:border-pink-500/50 hover:shadow-[0_15px_30px_-10px_rgba(236,72,153,0.3)] transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                    <div class="mb-6 p-3 bg-slate-800 w-fit rounded-lg text-pink-500 group-hover:text-pink-400 group-hover:scale-110 transition-all">
+                        <i data-lucide="video" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">The Educator: Content Creator</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        ค้นพบตัวตนในการเป็น "ผู้ถ่ายทอด" ผ่านการทำช่อง TikTok และดูแล Discord Community สอนเทคนิคการ Mod เกม เปลี่ยนเรื่องเทคนิคที่ซับซ้อนให้สนุกและเข้าใจง่าย
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 bg-slate-950 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center mb-16" data-aos="fade-up">
+                 <h2 class="text-4xl font-bold text-white mb-4">Featured Projects</h2>
+                 <div class="h-1 w-24 bg-cyan-500 rounded-full shadow-[0_0_15px_rgba(6,182,212,0.8)]"></div>
+                 <p class="text-slate-400 mt-4 text-center">ผลงานเชิงประจักษ์ที่แสดงถึงทักษะและความตั้งใจ</p>
+            </div>
+
+            <div class="space-y-24">
+                
+                <!-- Project 1: Discord -->
+                <div class="flex flex-col md:flex-row gap-8 items-center" data-aos="fade-right">
+                    <div class="w-full md:w-1/2 relative group">
+                        <div class="absolute inset-0 bg-cyan-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative bg-slate-900 border border-slate-800 p-8 rounded-xl overflow-hidden group-hover:border-cyan-500/50 transition-colors shadow-lg">
+                            <div class="absolute top-0 right-0 p-4 opacity-10 text-cyan-500">
+                                <i data-lucide="server" class="w-32 h-32"></i>
+                            </div>
+                            <i data-lucide="server" class="w-16 h-16 text-cyan-500 mb-6 group-hover:scale-110 transition-transform"></i>
+                            <h3 class="text-2xl font-bold text-white mb-2">Discord Support Community</h3>
+                            <div class="flex gap-2 mb-4">
+                                <span class="text-xs font-semibold px-2 py-1 bg-cyan-900/40 text-cyan-300 rounded border border-cyan-700/50">Community Leader</span>
+                                <span class="text-xs font-semibold px-2 py-1 bg-slate-800 text-slate-300 rounded border border-slate-700">Entrepreneurship</span>
+                            </div>
+                            <p class="text-slate-400">บริหารจัดการ Community ขนาดใหญ่ที่มีสมาชิกกว่า 3,000 คน และมีการบริหารจัดการธุรกิจดิจิทัลภายในเซิร์ฟเวอร์</p>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 md:pl-8 border-l border-slate-800 md:border-l-cyan-900/30">
+                         <h3 class="text-3xl font-bold text-white mb-6">Community Management & Entrepreneurship</h3>
+                         <p class="text-slate-400 mb-6 leading-relaxed">
+                           การดูแลคนจำนวนมากควบคู่ไปกับการบริหารธุรกิจ ทำให้ผมได้ฝึกทักษะการเป็นผู้นำและการจัดการ
+                         </p>
+                         <ul class="space-y-4 text-slate-300">
+                            <li class="flex items-start gap-3 group">
+                                <i data-lucide="award" class="w-5 h-5 text-yellow-400 mt-1 group-hover:scale-125 transition-transform"></i>
+                                <div>
+                                    <span class="font-semibold text-white group-hover:text-cyan-400 transition-colors">Systematic Support:</span>
+                                    <p class="text-sm text-slate-400">สร้างระบบ Ticket และใช้ Bot ช่วยจัดการปัญหา User อย่างเป็นระบบ</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3 group">
+                                <i data-lucide="shopping-bag" class="w-5 h-5 text-yellow-400 mt-1 group-hover:scale-125 transition-transform"></i>
+                                <div>
+                                    <span class="font-semibold text-white group-hover:text-cyan-400 transition-colors">Digital Commerce:</span>
+                                    <p class="text-sm text-slate-400">มีการจำหน่ายสินค้าดิจิทัลและบริหารรายได้ภายในเซิร์ฟเวอร์ (รายได้เฉลี่ย 3,000 บาท/เดือน)</p>
+                                </div>
+                            </li>
+                         </ul>
+                         <a href="https://discord.gg/FnmWw7nWyq" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-500 transition shadow-lg shadow-indigo-500/30 mt-4 border border-transparent hover:border-indigo-300 transform hover:scale-105">
+                            <i data-lucide="server" class="w-5 h-5"></i>
+                            <span>Join Community</span>
+                         </a>
+                    </div>
+                </div>
+
+                 <!-- Project 2: TikTok -->
+                 <div class="flex flex-col md:flex-row-reverse gap-8 items-center" data-aos="fade-left">
+                    <div class="w-full md:w-1/2 relative group">
+                        <div class="absolute inset-0 bg-pink-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative bg-slate-900 border border-slate-800 p-8 rounded-xl overflow-hidden group-hover:border-pink-500/50 transition-colors shadow-lg">
+                            <div class="absolute top-0 right-0 p-4 opacity-10 text-pink-500">
+                                <i data-lucide="video" class="w-32 h-32"></i>
+                            </div>
+                            <i data-lucide="video" class="w-16 h-16 text-pink-500 mb-6 group-hover:scale-110 transition-transform"></i>
+                            <h3 class="text-2xl font-bold text-white mb-2">TikTok Education Channel</h3>
+                            <div class="flex gap-2 mb-4">
+                                <span class="text-xs font-semibold px-2 py-1 bg-pink-900/40 text-pink-300 rounded border border-pink-700/50">Content Creator</span>
+                                <span class="text-xs font-semibold px-2 py-1 bg-slate-800 text-slate-300 rounded border border-slate-700">Video Editing</span>
+                            </div>
+                            <p class="text-slate-400">ช่องให้ความรู้เรื่อง Game Modding ที่มียอดผู้ติดตามกว่า 2,000 คน และยอดวิวเฉลี่ย 10,000+ ต่อคลิป</p>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 md:pl-8 md:text-right border-l md:border-l-0 md:border-r border-slate-800 md:border-r-pink-900/30 pl-4 md:pl-0 md:pr-4">
+                         <h3 class="text-3xl font-bold text-white mb-6">Digital Media for Education</h3>
+                         <p class="text-slate-400 mb-6 leading-relaxed">
+                           ผมเชื่อในพลังของ "Micro-learning" การย่อยเนื้อหาที่ซับซ้อนให้สั้น กระชับ และสนุก ภายในเวลา 1 นาที
+                         </p>
+                         <ul class="space-y-4 text-slate-300 flex flex-col md:items-end">
+                            <li class="flex items-start gap-3 flex-row-reverse text-right group">
+                                <i data-lucide="award" class="w-5 h-5 text-pink-400 mt-1 group-hover:scale-125 transition-transform"></i>
+                                <div>
+                                    <span class="font-semibold text-white group-hover:text-pink-400 transition-colors">Complex to Simple:</span>
+                                    <p class="text-sm text-slate-400">แปลงโค้ด Lua และวิธีการลง Mod ที่ยุ่งยาก ให้เป็นขั้นตอนง่ายๆ</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3 flex-row-reverse text-right group">
+                                <i data-lucide="award" class="w-5 h-5 text-pink-400 mt-1 group-hover:scale-125 transition-transform"></i>
+                                <div>
+                                    <span class="font-semibold text-white group-hover:text-pink-400 transition-colors">Engagement:</span>
+                                    <p class="text-sm text-slate-400">สร้างปฏิสัมพันธ์กับผู้เรียน ตอบคำถาม และรับฟัง Feedback สม่ำเสมอ</p>
+                                </div>
+                            </li>
+                         </ul>
+                         <a href="https://www.tiktok.com/@hengsosleepy?_r=1&_t=ZS-92eXkgMWgDJ" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-pink-600 text-white font-bold rounded-lg hover:bg-pink-500 transition shadow-lg shadow-pink-500/30 mt-4 border border-transparent hover:border-pink-300 transform hover:scale-105">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                            <span>@hengsosleepy</span>
+                         </a>
+                    </div>
+                 </div>
+
+                 <!-- Project 3: Web -->
+                 <div class="flex flex-col md:flex-row gap-8 items-center" data-aos="fade-right">
+                    <div class="w-full md:w-1/2 relative group">
+                        <div class="absolute inset-0 bg-blue-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative bg-slate-900 border border-slate-800 p-8 rounded-xl overflow-hidden group-hover:border-blue-500/50 transition-colors shadow-lg">
+                            <div class="absolute top-0 right-0 p-4 opacity-10 text-blue-500">
+                                <i data-lucide="code" class="w-32 h-32"></i>
+                            </div>
+                            <i data-lucide="code" class="w-16 h-16 text-blue-500 mb-6 group-hover:scale-110 transition-transform"></i>
+                            <h3 class="text-2xl font-bold text-white mb-2">Game Mod Download Hub</h3>
+                            <div class="flex gap-2 mb-4">
+                                <span class="text-xs font-semibold px-2 py-1 bg-blue-900/40 text-blue-300 rounded border border-blue-700/50">Web Development</span>
+                                <span class="text-xs font-semibold px-2 py-1 bg-slate-800 text-slate-300 rounded border border-slate-700">UI/UX Design</span>
+                            </div>
+                            <p class="text-slate-400">เว็บไซต์ส่วนตัวสำหรับรวบรวมและแจกจ่าย Mod เกม ที่พัฒนาขึ้นเองเพื่อแก้ปัญหาลิงก์เสียและความปลอดภัย</p>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 md:pl-8 border-l border-slate-800 md:border-l-blue-900/30">
+                         <h3 class="text-3xl font-bold text-white mb-6">Web Technology & Security</h3>
+                         <p class="text-slate-400 mb-6 leading-relaxed">
+                           โปรเจกต์ที่ทำให้ผมได้ฝึกทักษะ Full-stack เบื้องต้น และการตระหนักถึงความปลอดภัยของผู้ใช้งาน (User Safety)
+                         </p>
+                         <ul class="space-y-4 text-slate-300 mb-8">
+                            <li class="flex items-start gap-3 group">
+                                <i data-lucide="award" class="w-5 h-5 text-yellow-400 mt-1 group-hover:scale-125 transition-transform"></i>
+                                <div>
+                                    <span class="font-semibold text-white group-hover:text-blue-400 transition-colors">User-Centric Design:</span>
+                                    <p class="text-sm text-slate-400">ออกแบบหน้าเว็บให้ใช้งานง่าย ไม่ซับซ้อน รองรับทุกอุปกรณ์ (Responsive)</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3 group">
+                                <i data-lucide="award" class="w-5 h-5 text-yellow-400 mt-1 group-hover:scale-125 transition-transform"></i>
+                                <div>
+                                    <span class="font-semibold text-white group-hover:text-blue-400 transition-colors">Security Mindset:</span>
+                                    <p class="text-sm text-slate-400">ตรวจสอบความปลอดภัยของไฟล์ Mod ก่อนเผยแพร่ เพื่อสร้างความมั่นใจให้ผู้ใช้</p>
+                                </div>
+                            </li>
+                         </ul>
+                         
+                         <a href="https://sam-so-sleepy-web2-0-self.vercel.app/" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500 transition shadow-lg shadow-blue-500/30 border border-transparent hover:border-blue-300 transform hover:scale-105">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                            <span>Visit Website</span>
+                         </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-slate-900 relative border-t border-cyan-900/30">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-white mb-2">Get In Touch</h2>
+                <p class="text-slate-400">พร้อมที่จะเรียนรู้และเติบโต ติดต่อผมได้ที่ช่องทางด้านล่าง</p>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 mb-16" data-aos="fade-up" data-aos-delay="100">
+                <!-- Email -->
+                <a href="mailto:thanakrithbupphathaku@gmail.com" target="_blank" class="flex flex-col items-center p-6 bg-slate-950 border border-slate-800 rounded-xl hover:border-cyan-500 transition-all duration-300 group shadow-md hover:shadow-cyan-500/10 hover:-translate-y-2">
+                    <div class="p-4 bg-slate-900 rounded-full mb-4 group-hover:bg-slate-800 group-hover:scale-110 transition-all text-cyan-400">
+                        <i data-lucide="mail" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-bold text-white">Email</h3>
+                    <p class="text-slate-500 text-sm mt-1 group-hover:text-white transition break-all px-2">thanakrithbupphathaku<br/><span class="text-xs text-slate-600">@gmail.com</span></p>
+                </a>
+                
+                <!-- TikTok -->
+                <a href="https://www.tiktok.com/@hengsosleepy?_r=1&_t=ZS-92eXkgMWgDJ" target="_blank" class="flex flex-col items-center p-6 bg-slate-950 border border-slate-800 rounded-xl hover:border-pink-500 transition-all duration-300 group shadow-md hover:shadow-pink-500/10 hover:-translate-y-2">
+                    <div class="p-4 bg-slate-900 rounded-full mb-4 group-hover:bg-slate-800 group-hover:scale-110 transition-all text-pink-400">
+                        <i data-lucide="video" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-bold text-white">TikTok</h3>
+                    <p class="text-slate-500 text-sm mt-1 group-hover:text-white transition break-all px-2">@hengsosleepy<br/><span class="text-xs text-slate-600">Follow Me</span></p>
+                </a>
+                
+                <!-- Discord -->
+                <a href="https://discord.gg/FnmWw7nWyq" target="_blank" class="flex flex-col items-center p-6 bg-slate-950 border border-slate-800 rounded-xl hover:border-blue-500 transition-all duration-300 group shadow-md hover:shadow-blue-500/10 hover:-translate-y-2">
+                    <div class="p-4 bg-slate-900 rounded-full mb-4 group-hover:bg-slate-800 group-hover:scale-110 transition-all text-blue-400">
+                        <i data-lucide="server" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-bold text-white">Discord</h3>
+                    <p class="text-slate-500 text-sm mt-1 group-hover:text-white transition break-all px-2">Join Server<br/><span class="text-xs text-slate-600">Community</span></p>
+                </a>
+            </div>
+
+            <div class="p-10 bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-2xl text-white relative overflow-hidden group shadow-2xl hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-shadow duration-500" data-aos="zoom-in">
+                 <div class="absolute inset-0 bg-blue-600/10 mix-blend-overlay"></div>
+                 <div class="absolute -top-24 -right-24 w-48 h-48 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
+                 
+                 <h3 class="text-2xl font-bold mb-4 relative z-10">พร้อมสำหรับการศึกษาต่อในระดับมหาวิทยาลัย</h3>
+                 <p class="text-slate-300 mb-8 max-w-2xl mx-auto relative z-10 leading-relaxed">
+                   ด้วยพื้นฐานทางภาษา ความเชี่ยวชาญด้านเทคโนโลยี และประสบการณ์ในการสร้างสรรค์สื่อการสอน ผมมีความพร้อมและความมุ่งมั่นอย่างเต็มที่ ที่จะเป็นบุคลากรคุณภาพของคณะครุศาสตร์ และเติบโตเป็น "ครูยุคใหม่" ที่สร้างการเปลี่ยนแปลงให้กับการศึกษาไทย
+                 </p>
+                 <button class="relative z-10 px-10 py-4 bg-white text-slate-900 font-bold rounded-lg hover:bg-cyan-50 transition shadow-lg flex items-center gap-2 mx-auto hover:scale-105 transform duration-200">
+                    <i data-lucide="file-text" class="w-5 h-5"></i>
+                    Download Resume
+                 </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-slate-500 py-8 text-center text-sm border-t border-slate-900 relative z-10">
+        <p>&copy; 2024 Thanakrit Bupphataku. Designed with Passion & Code.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+        
+        // Initialize AOS Animation
+        AOS.init({
+            once: true,
+            offset: 100,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let isMenuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('hidden');
+                mobileMenuBtn.innerHTML = '<i data-lucide="x" class="w-7 h-7"></i>';
+            } else {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+            }
+            lucide.createIcons();
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                isMenuOpen = false;
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+                lucide.createIcons();
+            });
+        });
+
+        // Scroll Spy & Navbar Logic
+        const sections = ['home', 'about', 'passion', 'projects', 'contact'];
+        const navLinks = document.querySelectorAll('.nav-link');
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            // Navbar background effect
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('shadow-lg');
+            }
+
+            // Scroll Spy
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                const sectionTop = element.offsetTop;
+                const sectionHeight = element.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section;
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-cyan-400', 'bg-cyan-950/50', 'border-cyan-500/50', 'shadow-[0_0_10px_rgba(6,182,212,0.2)]');
+                link.classList.add('text-slate-400');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('text-cyan-400', 'bg-cyan-950/50', 'border', 'border-cyan-500/50', 'shadow-[0_0_10px_rgba(6,182,212,0.2)]');
+                    link.classList.remove('text-slate-400');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
